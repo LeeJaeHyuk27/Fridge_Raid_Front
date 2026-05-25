@@ -18,9 +18,7 @@ function Fridge() {
 
             if (res.status === 401) {
 
-                alert("로그인이 필요합니다.");
-
-                navigate("/");
+                navigate("/login");
 
                 return null;
             }

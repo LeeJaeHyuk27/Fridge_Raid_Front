@@ -62,9 +62,9 @@ function Login({ isModal = false, onClose }) {
 
       if (response.ok) {
         alert(message);
-        window.location.reload();
         if (isModal) {
             onClose();
+            window.location.reload();
         } else {
             navigate("/");
         }
@@ -136,7 +136,7 @@ function Login({ isModal = false, onClose }) {
           <button type="submit" className="join-button">
             로그인
           </button>
-          <p classname="account-verify">
+          <p className="account-verify">
             아직 회원이 아니신가요?{" "}
             <span className="login-link" onClick={() => navigate("/join")}>
               가입하기
