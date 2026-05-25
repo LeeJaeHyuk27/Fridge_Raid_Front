@@ -1,0 +1,67 @@
+.fridge-page{
+    min-height:100vh;
+    background:#f5f5f5;
+    padding:40px 20px;
+}
+
+.fridge-container{
+    max-width:800px;
+    margin:0 auto;
+}
+
+.fridge-header{
+    margin-bottom:24px;
+}
+
+.fridge-header h1{
+    font-size:32px;
+    font-weight:700;
+}
+
+.fridge-list{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.fridge-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:#fff;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.ingredient-info{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.ingredient-name{
+    font-size:18px;
+    font-weight:600;
+}
+
+.ingredient-type{
+    font-size:14px;
+    color:#888;
+}
+
+.ingredient-quantity{
+    font-size:18px;
+    font-weight:700;
+}
+
+.empty-message{
+    background:#fff;
+    padding:40px;
+    border-radius:16px;
+    text-align:center;
+}

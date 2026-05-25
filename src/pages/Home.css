@@ -1,0 +1,332 @@
+:root{
+  --primary:#FF7A00;
+  --primaryHover:#E96B00;
+  --bg:#FFF4E8;
+  --band1:#FFF6EC;
+  --band2:#FFEBD7;
+  --text:#222;
+  --sub:#666;
+  --border:#EEE;
+  --card:#fff;
+  --shadow: 0 10px 26px rgba(0,0,0,0.07);
+}
+
+* { box-sizing: border-box; }
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container{
+  max-width: 1100px;      /* ✅ 좌우 여백의 핵심 */
+  margin: 0 auto;
+  padding: 0 22px;        /* ✅ 모바일에서도 여백 유지 */
+}
+
+.muted{ color: var(--sub); }
+
+/* NAVBAR */
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--primary);
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 14px 0;
+}
+.logo{ font-weight: 900; font-size: 20px; letter-spacing: -0.2px; }
+.nav-links span{
+  margin: 0 10px;
+  cursor:pointer;
+  opacity: 0.9;
+}
+.nav-links .active{ opacity: 1; font-weight: 800; text-decoration: underline; }
+.nav-buttons{ display:flex; gap: 10px; }
+
+/* BUTTONS */
+.btn-primary{
+  background: var(--primary);
+  color:#fff;
+  border:none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor:pointer;
+}
+.btn-primary:hover{ background: var(--primaryHover); }
+
+.btn-ghost{
+  background:#FFF8F1;
+  color: var(--primary);
+  border: 1px solid rgba(255, 122, 0, 0.2);
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor:pointer;
+}
+.btn-ghost:hover{ filter: brightness(0.89); }
+.full{ width:100%; }
+
+.btn-login{
+  background:#fff;
+  color: var(--primary);
+  border: 1px solid rgba(255,255,255,0.65);
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor:pointer;
+}
+.btn-login:hover{ filter: brightness(0.89); }
+
+.btn-join{
+  background: var(--primaryHover);
+  color:#fff;
+  border:none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor:pointer;
+}
+.btn-join:hover{ filter: brightness(0.92); }
+
+.user-name{
+  background:#fff;
+  color: var(--primary);
+  border: 1px solid rgba(255,255,255,0.65);
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 350;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.btn-logout{
+  background: var(--primaryHover);
+  color:#fff;
+  border:none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor:pointer;
+}
+
+.btn-logout:hover{
+  filter: brightness(0.92);
+}
+
+/* SECTION BANDS (✅ 구분감) */
+.band{
+  position: relative;
+  padding: 34px 0;  /* ✅ 섹션 위아래 공간 */
+}
+.band::before{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:0; bottom:0;
+  border-top: 1px solid rgba(0,0,0,0.04);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  z-index: 0;
+}
+.band-hero{ background: #fff; }
+.band-best{ background: var(--band1); }
+.band-bottom{ background: var(--band2); }
+
+/* ✅ 웨이브 느낌 (이미지처럼 부드러운 곡선) */
+.band-best::after,
+.band-bottom::after{
+  content:"";
+  position:absolute;
+  left:0px; right:0px;
+  top:-16px;
+  height: 70px;
+  background: radial-gradient(100% 120% at 50% 120%, rgba(255,122,0,0.12) 0%, rgba(255,122,0,0.0) 60%);
+  z-index: 0;
+}
+
+.section, .hero{
+  position: relative;
+  z-index: 1;   /* 밴드 배경 위로 */
+}
+
+/* HERO */
+.hero{
+  display:grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 22px;
+  align-items:center;
+  padding: 18px 0;
+}
+.hero-text h1{
+  margin:0 0 10px;
+  font-size: 38px;
+  letter-spacing: -0.8px;
+}
+.hero-text p{
+  margin:0 0 16px;
+  color: var(--sub);
+  line-height: 1.6;
+}
+.hero-buttons{ display:flex; gap: 12px; flex-wrap: wrap; }
+.hero-image img{
+  width:100%;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+/* TITLES */
+.section-title{
+  text-align:center;
+  margin-bottom: 18px;
+}
+.section-title.left{ text-align:left; margin-bottom: 12px; }
+.section-title h2{ margin:0; font-size: 24px; }
+.section-title p{ margin:8px 0 0; color: var(--sub); }
+
+/* RECIPE GRID (BEST 5) */
+.recipe-grid{
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.recipe-card{
+  background: var(--card);
+  border-radius: 16px;
+  overflow:hidden;
+  box-shadow: var(--shadow);
+  transition: transform .2s ease;
+}
+.recipe-card:hover{ transform: translateY(-6px); }
+.recipe-card img{
+  width:100%;
+  height: 150px;
+  object-fit: cover;
+  display:block;
+}
+.recipe-info{ padding: 12px; }
+.recipe-info h3{ margin:0 0 6px; font-size: 16px; }
+.rating{ color: var(--primary); font-weight: 800; }
+
+/* BOTTOM SECTION */
+.bottom-section{
+  display:grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 18px;
+  align-items:start;
+}
+
+/* CARD */
+.card{
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+.card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+}
+.chip{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,122,0,0.12);
+  color: var(--primary);
+  font-weight: 800;
+}
+
+/* fridge list */
+.fridge-list{
+  list-style:none;
+  padding:0;
+  margin: 14px 0;
+  display:grid;
+  gap: 10px;
+}
+.fridge-list li{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+}
+
+/* search */
+.search-bar{
+  display:flex;
+  gap: 8px;
+  margin: 10px 0 14px;
+}
+.search-bar input{
+  flex:1;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  outline: none;
+}
+.icon-btn{
+  width: 44px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor:pointer;
+}
+
+/* recommended */
+.recommend-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.recommend-card{
+  background:#fff;
+  border-radius: 16px;
+  overflow:hidden;
+  box-shadow: var(--shadow);
+  transition: transform .2s ease;
+}
+.recommend-card:hover{ transform: translateY(-6px); }
+.recommend-card img{
+  width:100%;
+  height: 170px;
+  object-fit: cover;
+  display:block;
+}
+.recommend-title{
+  padding: 10px 12px 6px;
+  font-weight: 900;
+}
+.rating.small{
+  padding: 0 12px 12px;
+  font-size: 13px;
+}
+
+/* FOOTER */
+.footer{
+  background:#fff;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.footer-inner{
+  padding: 22px 0;
+  text-align:center;
+  color: var(--sub);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px){
+  .recipe-grid{ grid-template-columns: repeat(3, 1fr); }
+  .hero{ grid-template-columns: 1fr; }
+}
+@media (max-width: 700px){
+  .recipe-grid{ grid-template-columns: repeat(2, 1fr); }
+  .bottom-section{ grid-template-columns: 1fr; }
+  .recommend-grid{ grid-template-columns: 1fr; }
+  .hero-text h1{ font-size: 30px; }
+}
