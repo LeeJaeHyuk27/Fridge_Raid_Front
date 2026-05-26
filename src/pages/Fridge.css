@@ -1,67 +1,172 @@
 .fridge-page{
     min-height:100vh;
-    background:#f5f5f5;
+
+    background:
+    linear-gradient(
+        180deg,
+        #dfe7ef 0%,
+        #cfd9e3 100%
+    );
+
     padding:40px 20px;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
 }
 
 .fridge-container{
-    max-width:800px;
-    margin:0 auto;
+
+    width:100%;
+    max-width:900px;
+
+    background:
+    linear-gradient(
+        180deg,
+        #f8fbff 0%,
+        #dfe7ef 100%
+    );
+
+    border-radius:40px;
+
+    padding:40px;
+
+    border:8px solid #bfc9d4;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.18),
+    inset 0 2px 8px rgba(255,255,255,0.8);
+
+    position:relative;
+}
+
+/* 냉장고 손잡이 느낌 */
+.fridge-container::after{
+    content:"";
+
+    position:absolute;
+
+    top:60px;
+    right:18px;
+
+    width:14px;
+    height:180px;
+
+    border-radius:999px;
+
+    background:
+    linear-gradient(
+        180deg,
+        #9aa7b5,
+        #d8e0e8
+    );
+
+    box-shadow:
+    inset 0 2px 4px rgba(255,255,255,0.8),
+    0 2px 8px rgba(0,0,0,0.15);
 }
 
 .fridge-header{
-    margin-bottom:24px;
+    margin-bottom:32px;
+
+    border-bottom:2px solid rgba(0,0,0,0.08);
+
+    padding-bottom:18px;
 }
 
 .fridge-header h1{
-    font-size:32px;
-    font-weight:700;
+    font-size:36px;
+    font-weight:800;
+
+    color:#4b5b6b;
+
+    letter-spacing:-1px;
 }
 
 .fridge-list{
     display:flex;
     flex-direction:column;
-    gap:16px;
+    gap:18px;
 }
 
+/* 재료칸 */
 .fridge-item{
+
     display:flex;
     justify-content:space-between;
     align-items:center;
 
-    background:#fff;
+    background:
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,0.95),
+        rgba(240,245,250,0.95)
+    );
 
-    padding:20px;
+    padding:22px 24px;
 
-    border-radius:16px;
+    border-radius:20px;
 
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    border:1px solid rgba(180,190,200,0.4);
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.08),
+    inset 0 1px 3px rgba(255,255,255,0.9);
+
+    transition:all 0.2s ease;
+}
+
+.fridge-item:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 18px rgba(0,0,0,0.12),
+    inset 0 1px 3px rgba(255,255,255,0.9);
 }
 
 .ingredient-info{
     display:flex;
     flex-direction:column;
-    gap:4px;
+    gap:6px;
 }
 
 .ingredient-name{
-    font-size:18px;
-    font-weight:600;
+    font-size:20px;
+    font-weight:700;
+
+    color:#2f3b47;
 }
 
 .ingredient-type{
-    font-size:14px;
-    color:#888;
+    font-size:13px;
+
+    color:#7c8b99;
+
+    font-weight:600;
+
+    letter-spacing:0.5px;
 }
 
 .ingredient-quantity{
-    font-size:18px;
-    font-weight:700;
+    font-size:22px;
+    font-weight:800;
+
+    color:#5f7cff;
 }
 
 .empty-message{
-    background:#fff;
-    padding:40px;
-    border-radius:16px;
+
+    background:rgba(255,255,255,0.8);
+
+    padding:60px 20px;
+
+    border-radius:24px;
+
     text-align:center;
+
+    font-size:18px;
+
+    color:#6b7785;
+
+    border:2px dashed rgba(120,130,140,0.3);
 }
