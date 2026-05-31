@@ -33,8 +33,6 @@ function Fridge() {
 
             if (!data) return;
 
-            console.log(data);
-
             setFridgeItems(data);
 
         })
@@ -52,61 +50,102 @@ function Fridge() {
     }, [navigate]);
 
     if (loading) {
-        return <div>로딩중...</div>;
+        return (
+            <div className="fridge-loading">
+                냉장고 불러오는 중...
+            </div>
+        );
     }
 
+    const categoryCount = fridgeItems.reduce((acc, item) => {
+
+        const type = item.ingredientType;
+
+        acc[type] = (acc[type] || 0) + 1;
+
+        return acc;
+
+    }, {});
+
     return (
+
         <div className="fridge-page">
 
-            <div className="fridge-container">
+            <div className="fridge-topbar">
 
-                <div className="fridge-header">
-                    <h1>내 냉장고</h1>
+                <div className="logo">
+                    Fridge Raid
                 </div>
 
-                {fridgeItems.length === 0 ? (
+                <div className="page-title">
+                    내 냉장고
+                </div>
 
-                    <div className="empty-message">
-                        냉장고에 재료가 없습니다.
+                <div className="fridge-status">
+                    재료 {fridgeItems.length}개
+                </div>
+
+            </div>
+
+            <div className="fridge-wrapper">
+
+                <img
+                    src="/assets/fridge.png"
+                    alt="냉장고"
+                    className="fridge-image"
+                />
+
+                {/* 유제품 */}
+                <button className="category dairy">
+
+                    <div className="emoji">
+                        🥛
                     </div>
 
-                ) : (
-
-                    <div className="fridge-list">
-
-                        {fridgeItems.map((item) => (
-
-                            <div
-                                key={item.fridgeItemId}
-                                className="fridge-item"
-                            >
-
-                                <div className="ingredient-info">
-
-                                    <div className="ingredient-name">
-                                        {item.ingredientName}
-                                    </div>
-
-                                    <div className="ingredient-type">
-                                        {item.ingredientType}
-                                    </div>
-
-                                </div>
-
-                                <div className="ingredient-quantity">
-
-                                    {item.quantityValue}
-                                    {item.quantityUnit}
-
-                                </div>
-
-                            </div>
-
-                        ))}
-
+                    <div className="count">
+                        {categoryCount["유제품"] || 0}
                     </div>
 
-                )}
+                </button>
+
+                {/* 과일 */}
+                <button className="category fruit">
+
+                    <div className="emoji">
+                        🍎
+                    </div>
+
+                    <div className="count">
+                        {categoryCount["과일"] || 0}
+                    </div>
+
+                </button>
+
+                {/* 채소 */}
+                <button className="category vegetable">
+
+                    <div className="emoji">
+                        🥬
+                    </div>
+
+                    <div className="count">
+                        {categoryCount["채소"] || 0}
+                    </div>
+
+                </button>
+
+                {/* 육류 */}
+                <button className="category meat">
+
+                    <div className="emoji">
+                        🥩
+                    </div>
+
+                    <div className="count">
+                        {categoryCount["육류"] || 0}
+                    </div>
+
+                </button>
 
             </div>
 
