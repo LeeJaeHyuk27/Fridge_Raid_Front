@@ -121,7 +121,7 @@ body{
 /* SECTION BANDS (✅ 구분감) */
 .band{
   position: relative;
-  padding: 34px 0;  /* ✅ 섹션 위아래 공간 */
+  padding: 34px 0; 
 }
 .band::before{
   content:"";
@@ -135,7 +135,6 @@ body{
 .band-best{ background: var(--band1); }
 .band-bottom{ background: var(--band2); }
 
-/* ✅ 웨이브 느낌 (이미지처럼 부드러운 곡선) */
 .band-best::after,
 .band-bottom::after{
   content:"";
@@ -149,7 +148,7 @@ body{
 
 .section, .hero{
   position: relative;
-  z-index: 1;   /* 밴드 배경 위로 */
+  z-index: 1;
 }
 
 /* HERO */

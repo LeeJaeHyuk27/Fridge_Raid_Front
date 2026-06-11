@@ -40,7 +40,6 @@
     position:relative;
 }
 
-/* 냉장고 손잡이 느낌 */
 .fridge-container::after{
     content:"";
 
@@ -89,7 +88,6 @@
     gap:18px;
 }
 
-/* 재료칸 */
 .fridge-item{
 
     display:flex;
