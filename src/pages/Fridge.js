@@ -23,7 +23,8 @@ function Fridge() {
     const [fridgeItems, setFridgeItems] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] =
+        useState(null);
 
     useEffect(() => {
 
@@ -35,8 +36,8 @@ function Fridge() {
             if (res.status === 401) {
 
                 navigate("/login");
-
                 return null;
+
             }
 
             if (!res.ok) {
@@ -44,6 +45,7 @@ function Fridge() {
             }
 
             return res.json();
+
         })
         .then((data) => {
 
@@ -52,11 +54,7 @@ function Fridge() {
             setFridgeItems(data);
 
         })
-        .catch((err) => {
-
-            console.error(err);
-
-        })
+        .catch(console.error)
         .finally(() => {
 
             setLoading(false);
@@ -67,82 +65,84 @@ function Fridge() {
 
     const groupedItems = useMemo(() => {
 
-        const map = {};
+        const grouped = {};
 
         fridgeItems.forEach((item) => {
 
-            if (!map[item.ingredientType]) {
-                map[item.ingredientType] = [];
+            if (!grouped[item.ingredientType]) {
+
+                grouped[item.ingredientType] = [];
+
             }
 
-            map[item.ingredientType].push(item);
+            grouped[item.ingredientType].push(item);
 
         });
 
-        return map;
+        return grouped;
 
     }, [fridgeItems]);
 
-    const categoryConfigs = [
+    const categories = [
 
         {
             type: "유제품",
             image: dairyImg,
-            className: "dairy",
+            className: "dairy"
         },
 
         {
             type: "과일",
             image: fruitImg,
-            className: "fruit",
+            className: "fruit"
         },
 
         {
             type: "채소",
             image: vegetableImg,
-            className: "vegetable",
+            className: "vegetable"
         },
 
         {
             type: "육류",
             image: meatImg,
-            className: "meat",
+            className: "meat"
         },
 
         {
             type: "해산물",
             image: seafoodImg,
-            className: "seafood",
+            className: "seafood"
         },
 
         {
             type: "곡물",
             image: grainImg,
-            className: "grain",
+            className: "grain"
         },
 
         {
             type: "버섯",
             image: mushroomImg,
-            className: "mushroom",
+            className: "mushroom"
         },
 
         {
             type: "음료",
             image: drinkImg,
-            className: "drink",
+            className: "drink"
         },
 
         {
             type: "조미료",
             image: seasoningImg,
-            className: "seasoning",
+            className: "seasoning"
         },
 
         {
             type: "가공식품",
             image: processedImg,
-            className: "processed",
+            className: "processed"
         },
 
     ];
@@ -160,16 +160,6 @@ function Fridge() {
 
         <div className="fridge-page">
 
-            <div className="fridge-title">
-
-                내 냉장고
-
-                <span>
-                    재료 {fridgeItems.length}개
-                </span>
-
-            </div>
-
             <div className="fridge-wrapper">
 
                 <img
@@ -178,42 +168,42 @@ function Fridge() {
                     className="fridge-image"
                 />
 
-                {categoryConfigs.map((category) => {
+                {
+                    categories.map((category) => {
 
-                    const count =
-                        groupedItems[category.type]?.length || 0;
+                        if (
+                            !groupedItems[category.type]
+                        ) {
+                            return null;
+                        }
 
-                    if (count === 0) return null;
+                        return (
 
-                    return (
+                            <button
+                                key={category.type}
+                                className={`category-icon ${category.className}`}
+                                onClick={() =>
+                                    setSelectedCategory(
+                                        category.type
+                                    )
+                                }
+                            >
 
-                        <button
-                            key={category.type}
-                            className={`category-icon ${category.className}`}
-                            onClick={() =>
-                                setSelectedCategory(category.type)
-                            }
-                        >
+                                <img
+                                    src={category.image}
+                                    alt={category.type}
+                                />
 
-                            <img
-                                src={category.image}
-                                alt={category.type}
-                            />
+                            </button>
 
-                            <div className="badge">
-                                {count}
-                            </div>
+                        );
 
-                        </button>
-
-                    );
-
-                })}
+                    })
+                }
 
             </div>
 
             {
-
                 selectedCategory && (
 
                     <div
@@ -230,7 +220,9 @@ function Fridge() {
                             }
                         >
 
-                            <div className="modal-header">
+                            <div
+                                className="modal-header"
+                            >
 
                                 <h2>
                                     {selectedCategory}
@@ -239,7 +231,9 @@ function Fridge() {
                                 <button
                                     className="close-btn"
                                     onClick={() =>
-                                        setSelectedCategory(null)
+                                        setSelectedCategory(
+                                            null
+                                        )
                                     }
                                 >
                                     ✕
@@ -250,21 +244,24 @@ function Fridge() {
                             <div className="modal-body">
 
                                 {
-                                    groupedItems[selectedCategory]
-                                        ?.map((item) => (
+                                    groupedItems[
+                                        selectedCategory
+                                    ]?.map((item) => (
 
                                         <div
-                                            key={item.fridgeItemId}
+                                            key={
+                                                item.fridgeItemId
+                                            }
                                             className="modal-item"
                                         >
 
-                                            <div>
+                                            <span>
                                                 {
                                                     item.ingredientName
                                                 }
-                                            </div>
+                                            </span>
 
-                                            <div>
+                                            <span>
 
                                                 {
                                                     item.quantityValue
@@ -274,7 +271,7 @@ function Fridge() {
                                                     item.quantityUnit
                                                 }
 
-                                            </div>
+                                            </span>
 
                                         </div>
 
@@ -288,7 +285,6 @@ function Fridge() {
                     </div>
 
                 )
-
             }
 
         </div>
