@@ -10,14 +10,13 @@
 
     align-items:center;
 
-    padding:40px;
 }
 
 .fridge-wrapper{
 
     position:relative;
 
-    width:900px;
+    width:1360px;
 }
 
 .fridge-image{
@@ -31,18 +30,9 @@
 
     position:absolute;
 
-    border:none;
-
-    background:none;
-
     cursor:pointer;
 
     transition:all .25s ease;
-}
-
-.category-icon img{
-
-    width:90px;
 }
 
 .category-icon:hover{
@@ -54,59 +44,65 @@
     drop-shadow(0 0 30px white);
 }
 
-/* 좌표는 냉장고 이미지 보고 조절 */
-
 .dairy{
+    width:100px;
     top:130px;
     left:320px;
 }
 
 .fruit{
+    width: 100px;
     top:120px;
     right:170px;
 }
 
 .vegetable{
-    top:320px;
-    left:150px;
+    width: 100px;
+    top:355px;
+    left:520px;
 }
 
 .mushroom{
+    width: 100px;
     top:320px;
     right:150px;
 }
 
 .grain{
+    width: 100px;
     top:500px;
-    left:170px;
+    left:500px;
 }
 
 .seasoning{
-    top:170px;
-    right:200px;
+    width: 100px;
+    top:310px;
+    right:340px;
 }
 
 .meat{
-    top: 242px;
-    left:300px;
+    width:150px;
+    top: 240px;
+    left:500px;
 }
 
 .seafood{
-    top:700px;
-    right:150px;
+    width: 150px;
+    top:610px;
+    right:500px;
 }
 
 .drink{
-    top:180px;
-    left:200px;
+    width: 200px;
+    top:290px;
+    left:280px;
 }
 
 .processed{
+    width: 100px;
     top:850px;
     right:220px;
 }
-
-/* 모달 */
 
 .modal-overlay{
 

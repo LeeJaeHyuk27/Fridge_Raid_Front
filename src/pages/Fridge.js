@@ -179,22 +179,17 @@ function Fridge() {
 
                         return (
 
-                            <button
-                                key={category.type}
-                                className={`category-icon ${category.className}`}
-                                onClick={() =>
-                                    setSelectedCategory(
-                                        category.type
-                                    )
-                                }
-                            >
-
-                                <img
-                                    src={category.image}
-                                    alt={category.type}
-                                />
-
-                            </button>
+                            <img
+    key={category.type}
+    src={category.image}
+    alt={category.type}
+    className={`category-icon ${category.className}`}
+    onClick={() =>
+        setSelectedCategory(
+            category.type
+        )
+    }
+/>
 
                         );
 
