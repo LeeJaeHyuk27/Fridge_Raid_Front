@@ -51,9 +51,9 @@
 }
 
 .fruit{
-    width: 100px;
-    top:120px;
-    right:170px;
+    width: 120px;
+    top:140px;
+    right:460px;
 }
 
 .vegetable{
@@ -63,15 +63,15 @@
 }
 
 .mushroom{
-    width: 100px;
-    top:320px;
-    right:150px;
+    width: 80px;
+    top:165px;
+    right:570px;
 }
 
 .grain{
-    width: 100px;
-    top:500px;
-    left:500px;
+    width: 160px;
+    top:615px;
+    left:490px;
 }
 
 .seasoning{
@@ -100,8 +100,8 @@
 
 .processed{
     width: 100px;
-    top:850px;
-    right:220px;
+    top:250px;
+    right:530px;
 }
 
 .modal-overlay{

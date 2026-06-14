@@ -180,16 +180,16 @@ function Fridge() {
                         return (
 
                             <img
-    key={category.type}
-    src={category.image}
-    alt={category.type}
-    className={`category-icon ${category.className}`}
-    onClick={() =>
-        setSelectedCategory(
-            category.type
-        )
-    }
-/>
+                                key={category.type}
+                                src={category.image}
+                                alt={category.type}
+                                className={`category-icon ${category.className}`}
+                                onClick={() =>
+                                    setSelectedCategory(
+                                        category.type
+                                    )
+                                }
+                            />
 
                         );
 
