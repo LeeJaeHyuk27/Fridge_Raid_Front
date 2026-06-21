@@ -22,9 +22,8 @@ function Fridge() {
 
     const [fridgeItems, setFridgeItems] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const [selectedCategory, setSelectedCategory] =
-        useState(null);
+    const [editingItemId, setEditingItemId] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(() => {
 
@@ -85,66 +84,16 @@ function Fridge() {
 
     const categories = [
 
-        {
-            type: "유제품",
-            image: dairyImg,
-            className: "dairy"
-        },
-
-        {
-            type: "과일",
-            image: fruitImg,
-            className: "fruit"
-        },
-
-        {
-            type: "채소",
-            image: vegetableImg,
-            className: "vegetable"
-        },
-
-        {
-            type: "육류",
-            image: meatImg,
-            className: "meat"
-        },
-
-        {
-            type: "해산물",
-            image: seafoodImg,
-            className: "seafood"
-        },
-
-        {
-            type: "곡물",
-            image: grainImg,
-            className: "grain"
-        },
-
-        {
-            type: "버섯",
-            image: mushroomImg,
-            className: "mushroom"
-        },
-
-        {
-            type: "음료",
-            image: drinkImg,
-            className: "drink"
-        },
-
-        {
-            type: "조미료",
-            image: seasoningImg,
-            className: "seasoning"
-        },
-
-        {
-            type: "가공식품",
-            image: processedImg,
-            className: "processed"
-        },
-
+        {type: "유제품", image: dairyImg, className: "dairy"},
+        {type: "과일", image: fruitImg, className: "fruit"},
+        {type: "채소", image: vegetableImg, className: "vegetable"},
+        {type: "육류", image: meatImg, className: "meat"},
+        {type: "해산물", image: seafoodImg, className: "seafood"},
+        {type: "곡물", image: grainImg, className: "grain"},
+        {type: "버섯", image: mushroomImg, className: "mushroom"},
+        {type: "음료", image: drinkImg, className: "drink"},
+        {type: "조미료", image: seasoningImg, className: "seasoning"},
+        {type: "가공식품", image: processedImg, className: "processed"},
     ];
 
     if (loading) {
@@ -156,18 +105,80 @@ function Fridge() {
         );
     }
 
+    const deleteItem = (fridgeItemId) => {
+        if (!window.confirm("정말 삭제하시겠습니까?")) {return;}
+        fetch(
+            `http://localhost:8080/api/fridge/${fridgeItemId}`,
+            {
+                method: "DELETE",
+                credentials: "include",
+            }
+        )
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error(
+                    "삭제 실패"
+                );
+            }
+            setFridgeItems((prev) =>
+                prev.filter(
+                    (item) =>
+                        item.fridgeItemId !== fridgeItemId
+                )
+            );
+
+        })
+        .catch(console.error);
+    };
+
+    const updateQuantity = (
+        fridgeItemId,
+        quantityValue
+    ) => {
+
+        fetch(
+            `http://localhost:8080/api/fridge/${fridgeItemId}`,
+            {
+                method: "PATCH",
+
+                credentials: "include",
+
+                headers: {
+                    "Content-Type":
+                        "application/json",
+                },
+
+                body: JSON.stringify({
+                    quantityValue,
+                }),
+            }
+        )
+        .then((res) => {
+
+            if (!res.ok) {
+                throw new Error();
+            }
+
+            setFridgeItems((prev) =>
+                prev.map((item) =>
+                    item.fridgeItemId ===
+                    fridgeItemId
+                        ? {
+                            ...item,
+                            quantityValue,
+                        }
+                        : item
+                )
+            );
+
+        })
+        .catch(console.error);
+    };
+
     return (
-
         <div className="fridge-page">
-
             <div className="fridge-wrapper">
-
-                <img
-                    src={fridgeImg}
-                    alt="냉장고"
-                    className="fridge-image"
-                />
-
+                <img src={fridgeImg} alt="냉장고" className="fridge-image"/>
                 {
                     categories.map((category) => {
 
@@ -176,9 +187,7 @@ function Fridge() {
                         ) {
                             return null;
                         }
-
                         return (
-
                             <img
                                 key={category.type}
                                 src={category.image}
@@ -190,100 +199,65 @@ function Fridge() {
                                     )
                                 }
                             />
-
                         );
-
                     })
                 }
-
             </div>
-
             {
                 selectedCategory && (
-
-                    <div
-                        className="modal-overlay"
-                        onClick={() =>
-                            setSelectedCategory(null)
-                        }
-                    >
-
-                        <div
-                            className="modal"
-                            onClick={(e) =>
-                                e.stopPropagation()
-                            }
-                        >
-
-                            <div
-                                className="modal-header"
-                            >
-
-                                <h2>
-                                    {selectedCategory}
-                                </h2>
-
-                                <button
-                                    className="close-btn"
-                                    onClick={() =>
-                                        setSelectedCategory(
-                                            null
-                                        )
-                                    }
-                                >
-                                    ✕
-                                </button>
-
+                    <div className="modal-overlay" onClick={() => setSelectedCategory(null)}>
+                        <div className="modal" onClick={(e) => e.stopPropagation()}>
+                            <div className="modal-header">
+                                <h2>{selectedCategory}</h2>
+                                <button className="close-btn" onClick={() => setSelectedCategory(null)}>✕</button>
                             </div>
-
                             <div className="modal-body">
+                                {groupedItems[selectedCategory]?.map((item) => (
+                                        <div key={item.fridgeItemId} className="modal-item">
+                                            <span>{item.ingredientName}</span>
+                                            <button
+    onClick={() =>
+        updateQuantity(
+            item.fridgeItemId,
+            Number(
+                item.quantityValue
+            ) + 1
+        )
+    }
+>
+    +
+</button>
 
-                                {
-                                    groupedItems[
-                                        selectedCategory
-                                    ]?.map((item) => (
+<span>
+    {item.quantityValue}
+    {item.quantityUnit}
+</span>
 
-                                        <div
-                                            key={
-                                                item.fridgeItemId
-                                            }
-                                            className="modal-item"
-                                        >
-
-                                            <span>
-                                                {
-                                                    item.ingredientName
-                                                }
-                                            </span>
-
-                                            <span>
-
-                                                {
-                                                    item.quantityValue
-                                                }
-
-                                                {
-                                                    item.quantityUnit
-                                                }
-
-                                            </span>
-
+<button
+    onClick={() =>
+        updateQuantity(
+            item.fridgeItemId,
+            Math.max(
+                0,
+                Number(
+                    item.quantityValue
+                ) - 1
+            )
+        )
+    }
+>
+    -
+</button>
+                                            <button className="delete-btn" onClick={() => deleteItem(item.fridgeItemId)}>삭제</button>
                                         </div>
-
                                     ))
                                 }
-
                             </div>
-
                         </div>
-
                     </div>
-
                 )
             }
-
         </div>
-
     );
 }
 
